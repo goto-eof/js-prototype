@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>JS OOP</title>
+ </head>
+ <body>
+  <p>Apri la console</p>
+
+  <script>
+	// Definisco un oggetto di tipo Persona
+	var Persona = function(nome, cognome){
+		this.nome = nome;
+		this.cognome = cognome;
+	};
+	// Aggiungo un metodo a Persona che restituisce il nome e il cognome
+	Persona.prototype.getDetails = function(){
+		return "Nome: " + this.nome + "\nCognome: "+this.cognome;
+	};
+	// Definisco un oggetto di tipo Studente che eredita Persona
+	var Studente = function(nome, cognome, matricola){
+		this.matricola = matricola;
+		Persona.call(this, nome, cognome); // chiama il costruttore del genitore, ossia Persona
+	};
+
+	// Questa riga di codice effettua un'eredità da Persona
+	Studente.prototype = new Persona();
+
+	// Aggiungo un nuovo metodo all'oggetto Studente
+	Studente.prototype.action = function(){
+			return "La matricola " + this.matricola + " sta studiando";
+	};
+
+	// crea un'istanza di Studente
+	var personaStudente = new Studente("Mario", "Rossi", "123456");
+	// personaStudente.toString()
+	console.log(personaStudente);
+	// Stampa dettagli Studente
+	console.log(personaStudente.getDetails());
+	// Cmabio il nome di personaStudente
+	personaStudente.nome = "Mark";
+	console.log("--------------[ il nome di personaStudente è cambiato ]----------------");
+	// personaStudente.toString()
+	console.log(personaStudente);
+	// Stampa dettagli Studente
+	console.log(personaStudente.getDetails());
+	// Stampa la stringa restituita dal metodo action di Studente
+	console.log(personaStudente.action());
+  </script>
+ </body>
+</html>

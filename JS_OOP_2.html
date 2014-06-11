@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>JS OOP</title>
+ </head>
+ <body>
+  <p>Apri la console</p>
+  <script>
+	var Persona = function(nome, cognome){
+		// Creo un << object literal >>
+		// that sarà accessibile pubblicamente ma non le sue proprietà
+		var that = {
+			getNome: function(){
+				return nome;
+				},
+			getCognome: function(){
+				return cognome;
+				},
+			getDetails: function(){
+				return "Nome: " + nome + "\nCognome: "+cognome;
+			}
+		};
+		return that;
+	};
+	// Creo un oggetto di tipo Studente che eredita le proprietà di Persona
+	var Studente = function(nome, cognome, matricola){
+		var that = Persona(nome, cognome);
+		that.action = function(){
+			return "La matricola " + matricola + " sta studiando";
+		};
+		that.getMatricola = function(){
+			return matricola;
+		};
+		return that;
+	};
+
+	// crea un'istanza di Studente
+	var personaStudente = new Studente("Mario", "Rossi", "123456");
+	// personaStudente.toString()
+	console.log(personaStudente);
+	// Stampa dettagli Studente
+	console.log(personaStudente.getDetails());
+	// Cmabio il nome di personaStudente
+	personaStudente.nome = "Mark";
+	// il nome originario di personaStudente non è cambiato, abbiamo solo aggiunto 
+	// la proprietà pubblica nome a that
+	console.log("--------------[ il nome di personaStudente NON è cambiato ]----------------");
+	// personaStudente.toString()
+	console.log(personaStudente);
+	// Stampa dettagli Studente
+	console.log(personaStudente.getDetails());
+	// Stampa la stringa restituita dal metodo action di Studente
+	console.log(personaStudente.action());
+  </script>
+ </body>
+</html>
